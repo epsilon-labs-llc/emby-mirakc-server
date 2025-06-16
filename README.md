@@ -22,14 +22,14 @@ tv-server/
 │ └── config/
 │
 └── mirakc/
-     ├── compose.yml
-     ├── config.yml
-     ├── b25/
-     │ ├── Dockerfile
-     │ └── main.sh
-     └── bcas/
-           ├── Dockerfile
-           └── main.sh
+  ├── compose.yml
+  ├── config.yml
+  ├── b25/
+  │ ├── Dockerfile
+  │ └── main.sh
+  └── bcas/
+    ├── Dockerfile
+    └── main.sh
 ```
 
 ## 初期設定とセットアップ
