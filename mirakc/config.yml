@@ -1,0 +1,41 @@
+epg:
+  cache-dir: /var/lib/mirakc/epg
+
+server:
+  addrs:
+    - http: '0.0.0.0:40772'
+
+channels:
+  - name: "NHK総合"
+    type: "GR"
+    channel: "19"
+
+  - name: "NHK教育"
+    type: "GR"
+    channel: "26"
+
+tuners:
+  - name: "PX-Q1UD_0"
+    types: [GR]
+    command: >-
+      recdvb --dev 0 {{channel}} {{duration}} -
+
+  - name: "PX-Q1UD_1"
+    types: [GR]
+    command: >-
+      recdvb --dev 1 {{channel}} {{duration}} -
+
+  - name: "PX-Q1UD_2"
+    types: [GR]
+    command: >-
+      recdvb --dev 2 {{channel}} {{duration}} -
+
+  - name: "PX-Q1UD_3"
+    types: [GR]
+    command: >-
+      recdvb --dev 3 {{channel}} {{duration}} -
+
+filters:
+  decode-filter:
+    command: >-
+      socat - tcp-connect:b25:40773

@@ -1,0 +1,44 @@
+services:
+  mirakc:
+    image: docker.io/mirakc/mirakc:alpine
+    container_name: mirakc
+    init: true
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Tokyo
+      RUST_LOG: info
+    devices:
+      - /dev/dvb:/dev/dvb
+    volumes:
+      - mirakc-epg:/var/lib/mirakc/epg
+      - ./config.yml:/etc/mirakc/config.yml:ro
+    ports:
+      - 40772:40772
+
+  b25:
+    container_name: b25
+    build:
+      context: ./b25
+    depends_on:
+      - bcas
+    init: true
+    restart: unless-stopped
+    ports:
+      - 40773:40773
+    environment:
+      BCAS_SERVER: bcas:40774
+      TZ: Asia/Tokyo
+
+  bcas:
+    container_name: bcas
+    build:
+      context: ./bcas
+    init: true
+    restart: unless-stopped
+    devices:
+      - /dev/bus/usb
+    ports:
+      - 40774:40774
+
+volumes:
+  mirakc-epg:

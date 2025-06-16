@@ -1,0 +1,16 @@
+services:
+  emby:
+    image: emby/embyserver:latest
+    container_name: emby
+    restart: unless-stopped
+    environment:
+      - UID=1000
+      - GID=100
+      - GIDLIST=100
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./config:/config
+      - ./recordings:/recordings
+    ports:
+      - 8096:8096
+      - 8920:8920
